@@ -3,6 +3,12 @@ import { z } from "zod"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "@/lib/firebase/client"
 
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+}
+
 const CustomerFormSchema = z.object({
   fullName: z
     .string()
@@ -19,6 +25,10 @@ const CustomerFormSchema = z.object({
     .max(200, "Tên dịch vụ không được vượt quá 200 ký tự"),
 })
 
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -32,7 +42,7 @@ export async function POST(request: NextRequest) {
           message: "Dữ liệu không hợp lệ",
           errors: parsed.error.flatten().fieldErrors,
         },
-        { status: 400 }
+        { status: 400, headers: CORS_HEADERS }
       )
     }
 
@@ -51,7 +61,7 @@ export async function POST(request: NextRequest) {
         success: true,
         message: "Gửi thông tin thành công! Chúng tôi sẽ liên hệ bạn sớm nhất.",
       },
-      { status: 201 }
+      { status: 201, headers: CORS_HEADERS }
     )
   } catch (error) {
     console.error("[Contact API Error]", error)
@@ -61,7 +71,7 @@ export async function POST(request: NextRequest) {
         success: false,
         message: "Đã xảy ra lỗi khi gửi thông tin. Vui lòng thử lại.",
       },
-      { status: 500 }
+      { status: 500, headers: CORS_HEADERS }
     )
   }
 }
