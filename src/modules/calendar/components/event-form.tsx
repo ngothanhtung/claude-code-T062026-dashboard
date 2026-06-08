@@ -182,6 +182,7 @@ export function EventForm({ event, open, onOpenChange, onSave, onDelete }: Event
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
+                  {showCalendar && (
                   <Calendar
                     mode="single"
                     selected={formData.date}
@@ -191,8 +192,8 @@ export function EventForm({ event, open, onOpenChange, onSave, onDelete }: Event
                         setShowCalendar(false)
                       }
                     }}
-                    initialFocus
                   />
+                  )}
                 </PopoverContent>
               </Popover>
             </div>

@@ -54,9 +54,9 @@ export function Mail({
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
-        direction="horizontal"
-        onLayout={(sizes: number[]) => {
-          document.cookie = `react-resizable-panels:layout:mail=${JSON.stringify(sizes)}`;
+        orientation="horizontal"
+        onLayoutChange={(layout) => {
+          document.cookie = `react-resizable-panels:layout:mail=${JSON.stringify(Object.values(layout))}`;
         }}
         className="h-full items-stretch rounded-lg border overflow-hidden"
       >
@@ -66,14 +66,6 @@ export function Mail({
           collapsible={true}
           minSize={15}
           maxSize={20}
-          onCollapse={() => {
-            setIsCollapsed(true);
-            document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`;
-          }}
-          onResize={() => {
-            setIsCollapsed(false);
-            document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(false)}`;
-          }}
           className={cn(isCollapsed && "w-full transition-all duration-300 ease-in-out")}
         >
           <div
