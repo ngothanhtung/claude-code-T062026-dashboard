@@ -25,6 +25,49 @@ const CustomerFormSchema = z.object({
     .max(200, "Tên dịch vụ không được vượt quá 200 ký tự"),
 })
 
+async function sendTelegramNotification(
+  fullName: string,
+  email: string,
+  phoneNumber: string,
+  serviceName: string
+) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+
+  if (!botToken || !chatId) {
+    console.warn("[Telegram] Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID")
+    return
+  }
+
+  const text = [
+    "📩 *Yêu cầu tư vấn mới*",
+    "",
+    `👤 *Họ và tên:* ${fullName}`,
+    `📧 *Email:* ${email}`,
+    `📞 *Số điện thoại:* ${phoneNumber}`,
+    `🛠️ *Dịch vụ:* ${serviceName}`,
+    "",
+    `⏰ Thời gian: ${new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })}`,
+  ].join("\n")
+
+  try {
+    await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+          parse_mode: "Markdown",
+        }),
+      }
+    )
+  } catch (error) {
+    console.error("[Telegram] Failed to send notification:", error)
+  }
+}
+
 export async function OPTIONS() {
   return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
 }
@@ -55,6 +98,8 @@ export async function POST(request: NextRequest) {
       serviceName,
       createdAt: serverTimestamp(),
     })
+
+    await sendTelegramNotification(fullName, email, phoneNumber, serviceName)
 
     return NextResponse.json(
       {

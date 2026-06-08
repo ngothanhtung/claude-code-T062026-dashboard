@@ -1,0 +1,111 @@
+import { customerSchema } from "./types/customer-types"
+
+const customersData = [
+  {
+    id: "CUS-1001",
+    fullName: "Ngô Thanh Tùng",
+    email: "tungnt@softech.vn",
+    phoneNumber: "1234567890",
+    serviceName: "Web Development",
+  },
+  {
+    id: "CUS-1002",
+    fullName: "Trần Minh Hoàng",
+    email: "hoangtm@techcorp.vn",
+    phoneNumber: "0987654321",
+    serviceName: "Mobile App",
+  },
+  {
+    id: "CUS-1003",
+    fullName: "Lê Thu Hà",
+    email: "halt@company.vn",
+    phoneNumber: "0912345678",
+    serviceName: "Cloud Hosting",
+  },
+  {
+    id: "CUS-1004",
+    fullName: "Phạm Đức Anh",
+    email: "anhpd@startup.vn",
+    phoneNumber: "0901234567",
+    serviceName: "SEO Marketing",
+  },
+  {
+    id: "CUS-1005",
+    fullName: "Nguyễn Thị Lan",
+    email: "lan.nt@business.vn",
+    phoneNumber: "0932123456",
+    serviceName: "Web Development",
+  },
+  {
+    id: "CUS-1006",
+    fullName: "Hoàng Văn Nam",
+    email: "nam.hv@digital.vn",
+    phoneNumber: "0943234567",
+    serviceName: "UI/UX Design",
+  },
+  {
+    id: "CUS-1007",
+    fullName: "Đặng Minh Tuấn",
+    email: "tuan.dm@software.vn",
+    phoneNumber: "0954345678",
+    serviceName: "API Integration",
+  },
+  {
+    id: "CUS-1008",
+    fullName: "Vũ Thị Mai",
+    email: "mai.vt@solution.vn",
+    phoneNumber: "0965456789",
+    serviceName: "Cloud Hosting",
+  },
+  {
+    id: "CUS-1009",
+    fullName: "Bùi Quang Huy",
+    email: "huy.bq@agency.vn",
+    phoneNumber: "0976567890",
+    serviceName: "SEO Marketing",
+  },
+  {
+    id: "CUS-1010",
+    fullName: "Lý Thanh Thảo",
+    email: "thao.lt@media.vn",
+    phoneNumber: "0987678901",
+    serviceName: "Mobile App",
+  },
+  {
+    id: "CUS-1011",
+    fullName: "Đinh Văn Long",
+    email: "long.dv@enterprise.vn",
+    phoneNumber: "0998789012",
+    serviceName: "Web Development",
+  },
+  {
+    id: "CUS-1012",
+    fullName: "Trịnh Minh Châu",
+    email: "chau.tc@consulting.vn",
+    phoneNumber: "0909890123",
+    serviceName: "UI/UX Design",
+  },
+  {
+    id: "CUS-1013",
+    fullName: "Cao Thị Hương",
+    email: "huong.ct@retail.vn",
+    phoneNumber: "0910901234",
+    serviceName: "API Integration",
+  },
+  {
+    id: "CUS-1014",
+    fullName: "Vương Đức Minh",
+    email: "minh.vd@finance.vn",
+    phoneNumber: "0921012345",
+    serviceName: "Cloud Hosting",
+  },
+  {
+    id: "CUS-1015",
+    fullName: "Phan Thị Ngọc",
+    email: "ngoc.pt@health.vn",
+    phoneNumber: "0932123456",
+    serviceName: "SEO Marketing",
+  },
+]
+
+export const customerMockData = customerSchema.array().parse(customersData)

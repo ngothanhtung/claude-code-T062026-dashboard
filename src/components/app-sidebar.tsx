@@ -76,6 +76,11 @@ const data = {
           url: "/users",
           icon: Users,
         },
+        {
+          title: "Customers",
+          url: "/customers",
+          icon: Users,
+        },
       ],
     },
     {
