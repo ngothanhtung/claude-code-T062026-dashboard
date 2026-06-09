@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/sign-up") ||
     request.nextUrl.pathname.startsWith("/forgot-password") ||
     // API routes that don't require authentication
-    request.nextUrl.pathname.startsWith("/api/contact")
+    request.nextUrl.pathname.startsWith("/api/")
 
   if (isAuthPage) {
     if (isLoggedIn) {
